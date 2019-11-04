@@ -33,13 +33,16 @@ import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.SparseArray;
+
+import androidx.annotation.RequiresApi;
 
 import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.libvlc.util.VLCUtil;
 
 import java.io.File;
+
+//import android.support.annotation.RequiresApi;
 
 @SuppressWarnings("unused, JniMissingFunction")
 public class MediaPlayer extends VLCObject<MediaPlayer.Event> {

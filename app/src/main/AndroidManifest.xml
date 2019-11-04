@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.pedro.rtpstreamer">
+    package="com.mercy.alpacalive">
 
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- some devices need read permission to create folders or files -->
@@ -22,12 +22,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LiveListing"
+            android:name="com.mercy.alpacalive.LiveListing"
             android:label="@string/title_activity_live_listing"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".rtspplayer.RtspPlayer" />
+        <activity android:name="com.mercy.alpacalive.rtspplayer.RtspPlayer" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.mercy.alpacalive.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -38,11 +38,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".customexample.RtspActivity"
-            android:label="@string/rtsp_streamer"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".defaultexample.ExampleRtspActivity"
+            android:name="com.mercy.alpacalive.defaultexample.ExampleRtspActivity"
             android:label="@string/default_rtsp"
             android:screenOrientation="portrait" />
     </application>

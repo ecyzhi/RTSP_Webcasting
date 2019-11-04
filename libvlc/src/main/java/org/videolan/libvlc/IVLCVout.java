@@ -23,11 +23,12 @@ package org.videolan.libvlc;
 import android.annotation.TargetApi;
 import android.graphics.SurfaceTexture;
 import android.os.Build;
-import android.support.annotation.MainThread;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.TextureView;
+
+import androidx.annotation.MainThread;
 
 @SuppressWarnings("unused")
 public interface IVLCVout {
@@ -77,7 +78,7 @@ public interface IVLCVout {
      * @see #attachViews()
      */
     @MainThread
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    @TargetApi(Build.VERSION_CODES.P)
     void setVideoView(TextureView videoTextureView);
 
     /**
@@ -96,7 +97,7 @@ public interface IVLCVout {
      * @see #attachViews()
      */
     @MainThread
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    @TargetApi(Build.VERSION_CODES.P)
     void setVideoSurface(SurfaceTexture videoSurfaceTexture);
 
     /**
@@ -111,7 +112,7 @@ public interface IVLCVout {
      * @see #attachViews()
      */
     @MainThread
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    @TargetApi(Build.VERSION_CODES.P)
     void setSubtitlesView(TextureView subtitlesTextureView);
 
     /**
@@ -130,7 +131,7 @@ public interface IVLCVout {
      * @see #attachViews()
      */
     @MainThread
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    @TargetApi(Build.VERSION_CODES.P)
     void setSubtitlesSurface(SurfaceTexture subtitlesSurfaceTexture);
 
     /**

@@ -25,12 +25,13 @@ import android.graphics.SurfaceTexture;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.MainThread;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.TextureView;
+
+import androidx.annotation.MainThread;
 
 import org.videolan.libvlc.util.AndroidUtil;
 
@@ -94,7 +95,7 @@ public class AWindow implements IVLCVout {
             setSurface(mSurfaceHolder.getSurface());
         }
 
-        @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+        @TargetApi(Build.VERSION_CODES.P)
         private void attachTextureView() {
             mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
             setSurface(new Surface(mTextureView.getSurfaceTexture()));
@@ -117,7 +118,7 @@ public class AWindow implements IVLCVout {
                 throw new IllegalStateException();
         }
 
-        @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+        @TargetApi(Build.VERSION_CODES.P)
         private void releaseTextureView() {
             if (mTextureView != null)
                 mTextureView.setSurfaceTextureListener(null);
@@ -161,7 +162,7 @@ public class AWindow implements IVLCVout {
             }
         };
 
-        @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+        @TargetApi(Build.VERSION_CODES.P)
         private TextureView.SurfaceTextureListener createSurfaceTextureListener() {
             return new TextureView.SurfaceTextureListener() {
                 @Override
@@ -287,7 +288,7 @@ public class AWindow implements IVLCVout {
     }
 
     @Override
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    @TargetApi(Build.VERSION_CODES.P)
     public void setVideoSurface(SurfaceTexture videoSurfaceTexture) {
         setSurface(ID_VIDEO, new Surface(videoSurfaceTexture), null);
     }
@@ -310,7 +311,7 @@ public class AWindow implements IVLCVout {
     }
 
     @Override
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    @TargetApi(Build.VERSION_CODES.P)
     public void setSubtitlesSurface(SurfaceTexture subtitlesSurfaceTexture) {
         setSurface(ID_SUBTITLES, new Surface(subtitlesSurfaceTexture), null);
     }

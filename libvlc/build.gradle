@@ -3,12 +3,11 @@ apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.pedroSG94'
 
 android {
-  compileSdkVersion 27
-  buildToolsVersion "27.0.3"
+  compileSdkVersion 28
 
   defaultConfig {
-    minSdkVersion 9
-    targetSdkVersion 27
+    minSdkVersion 16
+    targetSdkVersion 28
     versionCode 1
     versionName "2.5.14"
 
@@ -32,5 +31,18 @@ android {
 }
 
 dependencies {
-  implementation 'com.android.support:support-annotations:27.1.1'
+//  implementation 'com.android.support:support-annotations:27.1.1'
+  //noinspection GradleCompatible
+  implementation 'androidx.appcompat:appcompat:1.0.0'
+  implementation 'androidx.annotation:annotation:1.0.0'
+  implementation 'androidx.appcompat:appcompat:1.0.2'
+  implementation 'androidx.annotation:annotation:1.0.2'
+  //noinspection GradleCompatible
+  androidTestImplementation 'androidx.appcompat:appcompat:1.0.0'
+  androidTestImplementation 'androidx.annotation:annotation:1.0.0'
+  //noinspection GradleCompatible
+  testImplementation 'androidx.appcompat:appcompat:1.0.0'
+  testImplementation 'androidx.annotation:annotation:1.0.0'
+
+  implementation "com.google.android.gms:play-services-gcm:12.+"
 }
