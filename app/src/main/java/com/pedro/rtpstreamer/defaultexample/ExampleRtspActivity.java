@@ -51,10 +51,14 @@ public class ExampleRtspActivity extends AppCompatActivity
     Button switchCamera = findViewById(R.id.switch_camera);
     switchCamera.setOnClickListener(this);
     etUrl = findViewById(R.id.et_rtp_url);
-    etUrl.setHint(R.string.hint_rtsp);
+//    etUrl.setHint(R.string.hint_rtsp);
     rtspCamera1 = new RtspCamera1(surfaceView, this);
     rtspCamera1.setReTries(10);
     surfaceView.getHolder().addCallback(this);
+
+    // Entering generated rtsp url automatically
+    String roomUrl = getIntent().getExtras().getString("ROOM_URL_KEY","Error");
+    etUrl.setText(roomUrl);
   }
 
   @Override

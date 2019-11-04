@@ -13,8 +13,6 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.pedro.rtpstreamer.backgroundexample.BackgroundActivity;
-import com.pedro.rtpstreamer.customexample.RtspActivity;
 import com.pedro.rtpstreamer.defaultexample.ExampleRtspActivity;
 import com.pedro.rtpstreamer.rtspplayer.RtspPlayer;
 import com.pedro.rtpstreamer.utils.ActivityLink;
@@ -55,13 +53,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
   private void createList() {
     activities = new ArrayList<>();
-    activities.add(new ActivityLink(new Intent(this, RtspActivity.class), getString(R.string.rtsp_streamer),
-            JELLY_BEAN));
     activities.add(new ActivityLink(new Intent(this, ExampleRtspActivity.class),
         getString(R.string.default_rtsp), JELLY_BEAN));
-    activities.add(new ActivityLink(new Intent(this, BackgroundActivity.class),
-        getString(R.string.service_rtp), LOLLIPOP));
     activities.add(new ActivityLink(new Intent(this, RtspPlayer.class), "RTSP Player", JELLY_BEAN));
+    activities.add(new ActivityLink(new Intent(this, LiveListing.class), "Live Listing", JELLY_BEAN));
   }
 
   private void setListAdapter(List<ActivityLink> activities) {
