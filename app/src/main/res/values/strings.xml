@@ -1,30 +1,15 @@
 <resources>
-    <string name="app_name">RTSP Streamer</string>
+    <string name="app_name">Alpaca Live</string>
     <string name="version">Version: %1$s</string>
     <string name="start_player">Start player</string>
     <string name="stop_player">Stop player</string>
     <string name="yourendpoint">yourendpoint</string>
 
-    <string name="rtsp_streamer">Custom RTSP</string>
-    <string name="rtmp_streamer">Custom RTMP</string>
-    <string name="default_rtmp">Default RTMP</string>
     <string name="default_rtsp">Default RTSP</string>
     <string name="from_file_rtsp">From file RTSP</string>
-    <string name="from_file_rtmp">From file RTMP</string>
-    <string name="surface_mode_rtsp">Surface mode RTSP</string>
-    <string name="surface_mode_rtmp">Surface mode RTMP</string>
-    <string name="texture_mode_rtsp">Texture mode RTSP</string>
-    <string name="texture_mode_rtmp">Texture mode RTMP</string>
-    <string name="display_rtmp">Display RTMP</string>
-    <string name="display_rtsp">Display RTSP</string>
-    <string name="opengl_rtmp">OpenGl RTMP</string>
-    <string name="opengl_rtsp">OpenGl RTSP</string>
-    <string name="service_rtp">Service RTP</string>
-    <string name="cube_test_rtmp">Cube test RTMP</string>
 
     <string name="tv_select">Select your streamer</string>
     <string name="hint_rtsp">rtsp://yourendpoint</string>
-    <string name="hint_rtmp">rtmp://yourendpoint</string>
     <string name="start_button">Start stream</string>
     <string name="stop_button">Stop stream</string>
     <string name="switch_camera_button">Switch camera</string>
@@ -106,5 +91,21 @@
     <string name="wowza_user">User</string>
     <string name="wowza_password">Password</string>
     <string name="noise_suppressor">Noise suppressor</string>
+
     <string name="title_activity_live_listing">LiveListing</string>
+
+    <!--Alpaca Live String-->
+    <string name="email">Email Address</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="termCondition">By signing up, you agree with our Terms and Conditions</string>
+    <string name="title_activity_event_listing">Event Listing</string>
+    <string name="title_activity_add_event">Add Event</string>
+    <string name="event_name">Event Name :</string>
+    <string name="event_location">Event Location :</string>
+    <string name="event_start">Start Date :</string>
+    <string name="event_end">End Date :</string>
+    <string name="event_details">Event Details :</string>
+    <string name="confirm">OK</string>
 </resources>

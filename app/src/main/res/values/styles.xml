@@ -1,18 +1,19 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
+<!--    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+<!--        <item name="colorPrimary">@color/appColor</item>-->
+<!--        <item name="colorPrimaryDark">@color/appColor</item>-->
+<!--        <item name="colorAccent">@color/appColor</item>-->
+<!--        <item name="android:buttonStyle">@style/buttonStyle</item>-->
+<!--        <item name="buttonStyle">@style/buttonStyle</item>-->
+<!--    </style>-->
+
+    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/appColor</item>
-        <item name="colorPrimaryDark">@color/appColor</item>
-        <item name="colorAccent">@color/appColor</item>
-        <item name="android:buttonStyle">@style/buttonStyle</item>
-        <item name="buttonStyle">@style/buttonStyle</item>
-    </style>
-
-    <style name="buttonStyle" parent="android:style/Widget.Button">
-        <item name="android:background">@xml/button_style</item>
-        <item name="android:padding">8dp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textStyle">bold</item>
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -23,5 +24,37 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="word_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="password_list">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="add_event_label">
+        <item name="android:layout_width">99dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_above">@+id/lblLocation</item>
+        <item name="android:layout_alignParentStart" tools:targetApi="jelly_bean_mr1">true</item>
+        <item name="android:layout_alignParentEnd" tools:targetApi="jelly_bean_mr1">true</item>
+        <item name="android:layout_marginStart" tools:targetApi="jelly_bean_mr1">40dp</item>
+        <item name="android:layout_marginEnd" tools:targetApi="jelly_bean_mr1">272dp</item>
+        <item name="android:layout_marginBottom">87dp</item>
+        <item name="android:fontFamily">@font/amiko</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="buttonStyle" parent="android:style/Widget.Button">
+        <item name="android:background">@xml/button_style</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
 

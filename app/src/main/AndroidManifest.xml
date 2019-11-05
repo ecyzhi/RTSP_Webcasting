@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.mercy.alpacalive">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- some devices need read permission to create folders or files -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -20,16 +22,38 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:targetApi="n">
         <activity
             android:name="com.mercy.alpacalive.LiveListing"
             android:label="@string/title_activity_live_listing"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.mercy.alpacalive.rtspplayer.RtspPlayer" />
         <activity
             android:name="com.mercy.alpacalive.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name="com.mercy.alpacalive.defaultexample.ExampleRtspActivity"
+            android:label="@string/default_rtsp"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".AddEvent"
+            android:label="@string/title_activity_add_event" />
+        <activity android:name=".ViewLiveStream" />
+        <activity
+            android:name=".EventListing"
+            android:label="@string/title_activity_event_listing"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
@@ -37,10 +61,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.mercy.alpacalive.defaultexample.ExampleRtspActivity"
-            android:label="@string/default_rtsp"
-            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -3,4 +3,11 @@
   <color name="appColor">#e74c3c</color>
   <color name="black">#000000</color>
   <color name="white">#ffffff</color>
+  <color name="colorPrimary">#FFBE88</color>
+  <color name="colorPrimaryDark">#FF7B89</color>
+  <color name="colorAccent">#D81B60</color>
+  <color name="colorWhite">#FFFFFF</color>
+  <color name="colorBlack">#000000</color>
+  <color name="gradientStart">#FBEEE6</color>
+  <color name="gradientEnd">#FFCAD4</color>
 </resources>

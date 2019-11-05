@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="add_event_label">
+        <item name="android:layout_width">99dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_above">@+id/lblLocation</item>
+        <item name="android:layout_alignParentStart">true</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_marginStart">40dp</item>
+        <item name="android:layout_marginEnd">272dp</item>
+        <item name="android:layout_marginBottom">87dp</item>
+        <item name="android:fontFamily">@font/amiko</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+</resources>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".AddEvent">
+
+    <TextView
+        android:id="@+id/lblName"
+        style="@style/add_event_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtEventName"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/event_name"
+        android:textAppearance="@style/add_event_label" />
+
+    <TextView
+        android:id="@+id/lblLocation"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtEventLocation"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/amiko"
+        android:text="@string/event_location"
+        android:textAppearance="@style/add_event_label"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/lblStart"
+        android:layout_width="291dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtStartDate"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="14dp"
+        android:text="@string/event_start"
+        android:textAppearance="@style/add_event_label" />
+
+    <TextView
+        android:id="@+id/lblEnd"
+        android:layout_width="291dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtEndDate"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/event_end"
+        android:textAppearance="@style/add_event_label"
+        tools:text="@string/event_end" />
+
+    <TextView
+        android:id="@+id/lblDetails"
+        android:layout_width="291dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtDetails"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="14dp"
+        android:text="@string/event_details"
+        android:textAppearance="@style/add_event_label" />
+
+    <EditText
+        android:id="@+id/txtEventName"
+        android:layout_width="301dp"
+        android:layout_height="34dp"
+        android:layout_above="@+id/lblLocation"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="30dp"
+        android:background="@color/colorWhite"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/txtStartDate"
+        android:layout_width="301dp"
+        android:layout_height="34dp"
+        android:layout_above="@+id/lblEnd"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="30dp"
+        android:background="@color/colorWhite"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/txtEndDate"
+        android:layout_width="301dp"
+        android:layout_height="34dp"
+        android:layout_above="@+id/lblDetails"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="30dp"
+        android:background="@color/colorWhite"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/txtDetails"
+        android:layout_width="301dp"
+        android:layout_height="34dp"
+        android:layout_above="@+id/btnConfirm"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="89dp"
+        android:layout_marginBottom="40dp"
+        android:background="@color/colorWhite"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/txtEventLocation"
+        android:layout_width="301dp"
+        android:layout_height="34dp"
+        android:layout_above="@+id/lblStart"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="30dp"
+        android:background="@color/colorWhite"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btnConfirm"
+        android:layout_width="108dp"
+        android:layout_height="35dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="126dp"
+        android:layout_marginEnd="177dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/login_button"
+        android:text="@string/confirm" />
+
+</RelativeLayout>
