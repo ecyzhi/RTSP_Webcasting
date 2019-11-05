@@ -22,8 +22,9 @@
                 android:id="@+id/txtRoomName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/gradient_background"
                 android:padding="15dp"
-                android:paddingEnd="5dp"
+                android:paddingEnd="10dp"
                 android:text="room name"
                 android:textAppearance="@style/add_event_label" />
 

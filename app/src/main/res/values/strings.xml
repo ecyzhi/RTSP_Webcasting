@@ -6,6 +6,9 @@
     <string name="stop_player">Stop player</string>
     <string name="yourendpoint">yourendpoint</string>
     <string name="room_name_promt">Please give a name to the room :</string>
+    <string name="username">Username :</string>
+    <string name="user_email">User Email :</string>
+    <string name="user_password">Password :</string>
 
     <string name="default_rtsp">Default RTSP</string>
     <string name="from_file_rtsp">From file RTSP</string>

@@ -73,6 +73,11 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void SignUpUser(View view){
+        Intent intent = new Intent(LoginActivity.this,SignUp.class);
+        startActivity(intent);
+    }
+
     private void Login(final String userEmail, final String userPassword){
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_LOGIN,

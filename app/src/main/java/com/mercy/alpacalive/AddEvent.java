@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class AddEvent extends AppCompatActivity {
 
-    private Button btnAddEvent, btnStartDate, btnEndDate;
+    private Button btnAddEvent, btnStartDate, btnEndDate, btnCancel;
     private EditText eventName, eventLocation, eventDetails;
     private TextView startDate, endDate;
 
@@ -34,12 +34,6 @@ public class AddEvent extends AppCompatActivity {
     private String sharedPrefFile = "com.mercy.alpacalive";
     private String GET_URL = "";
 
-    private Calendar calendar;
-    private int year, month, day;
-    DatePickerDialog dpd;
-
-    RequestQueue requestQueue;
-    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +50,14 @@ public class AddEvent extends AppCompatActivity {
         sharedPref = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
         final String serverIP = sharedPref.getString("SERVER_IP","");
         GET_URL = "http://" + serverIP + ":8080/alpacalive/InsertEvent.php";
+
+        btnCancel = findViewById(R.id.cancelButton);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
     }
 

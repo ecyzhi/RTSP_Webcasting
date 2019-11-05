@@ -29,6 +29,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="n">
+        <activity android:name=".SignUp"></activity>
         <activity android:name=".SetupIP">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

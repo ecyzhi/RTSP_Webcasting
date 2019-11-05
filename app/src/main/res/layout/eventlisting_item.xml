@@ -31,6 +31,7 @@
                 android:id="@+id/eventLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#99CCFF"
                 android:fontFamily="@font/amiko"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 tools:text="Location" />
@@ -39,6 +40,7 @@
                 android:id="@+id/eventStart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#99D4AD"
                 android:fontFamily="@font/amiko"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 tools:text="Start" />
@@ -47,6 +49,7 @@
                 android:id="@+id/eventEnd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#E0B678"
                 android:fontFamily="@font/amiko"
                 tools:text="End" />
 
@@ -54,6 +57,7 @@
                 android:id="@+id/eventDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/gradientEnd"
                 android:fontFamily="@font/amiko"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 tools:text="Details" />

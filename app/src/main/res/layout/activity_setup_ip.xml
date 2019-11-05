@@ -14,26 +14,26 @@
         android:text="Server IP Address :"
         android:textAppearance="@style/add_event_label"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnSet"
-        app:layout_constraintEnd_toStartOf="@+id/etServerIP"
-        app:layout_constraintHorizontal_bias="0.26"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.075" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etServerIP"
-        android:layout_width="181dp"
-        android:layout_height="40dp"
+        android:layout_width="212dp"
+        android:layout_height="46dp"
         android:layout_marginTop="196dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="96dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/default_ip"
         app:layout_constraintBottom_toTopOf="@+id/btnSet"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.159" />
+        app:layout_constraintVertical_bias="0.7" />
 
     <Button
         android:id="@+id/btnSet"
@@ -45,5 +45,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.547" />
 </androidx.constraintlayout.widget.ConstraintLayout>
