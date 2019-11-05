@@ -1,7 +1,5 @@
 package com.mercy.alpacalive;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +26,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mercy.alpacalive.adapter.LiveList;
 import com.mercy.alpacalive.adapter.LiveListAdapter;
+import com.mercy.alpacalive.defaultexample.ExampleRtspActivity;
 import com.mercy.alpacalive.rtspplayer.RtspPlayer;
 
 import org.json.JSONArray;
@@ -64,6 +63,7 @@ public class LiveListing extends AppCompatActivity {
 
         sharedPref = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
         final String serverIP = sharedPref.getString("SERVER_IP","");
+        final String retrievedUserName = sharedPref.getString("USER_NAME","");
         GET_URL = "http://" + serverIP + ":8080/alpacalive/SelectLive.php";
         ADD_LIVE_URL = "http://" + serverIP + ":8080/alpacalive/InsertLive.php";
 
@@ -77,7 +77,7 @@ public class LiveListing extends AppCompatActivity {
         dbLiveList = new ArrayList<>();
         
         eventName = findViewById(R.id.txtEventName);
-        String retrievedEventName = getIntent().getExtras().getString("EVENT_NAME","");
+        final String retrievedEventName = getIntent().getExtras().getString("EVENT_NAME","");
         eventName.setText(retrievedEventName);
 
         if (!isConnected()) {
@@ -90,77 +90,21 @@ public class LiveListing extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-
-                ViewDialog alert = new ViewDialog();
-                alert.showDialog(LiveListing.this);
-
-
-
                 roomCode = randomString(10);
                 roomUrl = "rtsp://" + serverIP + "/alpacalive/" + roomCode;
 
-
-
-                //Prompt for room name
-
-//                AlertDialog.Builder builder = new AlertDialog.Builder(LiveListing.this);
-//                builder.setTitle("Room Name");
-//
-//                View viewInflated = LayoutInflater.from(LiveListing.this).inflate(R.layout.dialog_room_name, null);
-//
-//                final EditText input = (EditText) viewInflated.findViewById(R.id.input_room_name);
-//                builder.setView(viewInflated);
-//                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                        roomName = input.getText().toString();
-//                    }
-//                });
-//                builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.cancel();
-//                    }
-//                });
-//
-//                builder.show();
-
-
-
-                Toast.makeText(getApplicationContext(),roomName, Toast.LENGTH_SHORT).show();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                //Test RoomName
+                roomName = retrievedUserName + " | " + retrievedEventName;
 
                 //Add the room to database
-//                addLive(userID,eventID,roomCode,roomName);
-//
-//                Intent intent = new Intent(LiveListing.this, ExampleRtspActivity.class);
-//                intent.putExtra("ROOM_CODE_KEY", roomCode);
-//                intent.putExtra("ROOM_URL_KEY", roomUrl);
-//                startActivity(intent);
+                addLive(userID,eventID,roomCode,roomName);
+
+                Intent intent = new Intent(LiveListing.this, ExampleRtspActivity.class);
+                intent.putExtra("ROOM_CODE_KEY", roomCode);
+                intent.putExtra("ROOM_URL_KEY", roomUrl);
+                startActivity(intent);
             }
         });
-
 
 
         liveList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -178,30 +122,6 @@ public class LiveListing extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-
-    public class ViewDialog {
-
-        public void showDialog(Activity activity){
-            final Dialog dialog = new Dialog(activity);
-            dialog.setTitle("Please enter a room name: ");
-            dialog.setCancelable(false);
-            dialog.setContentView(R.layout.dialog_room_name);
-
-//            TextView text = (TextView) dialog.findViewById(R.id.text_dialog);
-//            text.setText(msg);
-
-//            Button dialogButton = dialog.findViewById(R.id.fab);
-//            dialogButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    dialog.dismiss();
-//                }
-//            });
-
-            dialog.show();
-
-        }
     }
 
     private boolean isConnected(){
