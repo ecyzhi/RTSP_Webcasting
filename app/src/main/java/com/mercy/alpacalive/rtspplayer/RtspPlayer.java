@@ -40,6 +40,10 @@ public class RtspPlayer extends AppCompatActivity implements VlcListener, View.O
         etEndpoint = (EditText) findViewById(R.id.et_endpoint);
         vlcVideoLibrary = new VlcVideoLibrary(this, this, surfaceView);
         vlcVideoLibrary.setOptions(Arrays.asList(options));
+
+        // Entering generated rtsp url automatically
+        String roomUrl = getIntent().getExtras().getString("ROOM_URL_KEY","Error");
+        etEndpoint.setText(roomUrl);
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.mercy.alpacalive.adapter.LiveList;
 import com.mercy.alpacalive.adapter.LiveListAdapter;
 import com.mercy.alpacalive.defaultexample.ExampleRtspActivity;
+import com.mercy.alpacalive.rtspplayer.RtspPlayer;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -58,6 +60,11 @@ public class LiveListing extends AppCompatActivity {
         final String serverIP = sharedPref.getString("SERVER_IP","");
         GET_URL = "http://" + serverIP + ":8080/alpacalive/SelectLive.php";
 
+        //Get eventID, userID for adding into database when streamer open new room
+        String userID = sharedPref.getString("USER_ID","");
+        String eventID = getIntent().getExtras().getString("EVENT_ID","");
+
+
         liveList = findViewById(R.id.live_list);
         pd = new ProgressDialog(this);
         dbLiveList = new ArrayList<>();
@@ -82,8 +89,29 @@ public class LiveListing extends AppCompatActivity {
                 roomCode = randomString(10);
                 roomUrl = "rtsp://" + serverIP + "/alpacalive/" + roomCode;
 
+                //Add the room to database
+
+
                 Intent intent = new Intent(LiveListing.this, ExampleRtspActivity.class);
                 intent.putExtra("ROOM_CODE_KEY", roomCode);
+                intent.putExtra("ROOM_URL_KEY", roomUrl);
+                startActivity(intent);
+            }
+        });
+
+
+
+        liveList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Object object = parent.getItemAtPosition(position);
+                LiveList itemAtPosition = (LiveList) object;
+//                String clicked = itemAtPosition.getRoomCode();
+//                Toast.makeText(getApplicationContext(),clicked, Toast.LENGTH_SHORT).show();
+
+                //Click to go to stream room
+                roomUrl = "rtsp://" + serverIP + "/alpacalive/" + itemAtPosition.getRoomCode();
+                Intent intent = new Intent(LiveListing.this, RtspPlayer.class);
                 intent.putExtra("ROOM_URL_KEY", roomUrl);
                 startActivity(intent);
             }

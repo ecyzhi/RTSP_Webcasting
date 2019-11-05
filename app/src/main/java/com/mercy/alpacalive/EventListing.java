@@ -73,8 +73,9 @@ public class EventListing extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object object = parent.getItemAtPosition(position);
                 EventList itemAtPosition = (EventList) object;
-                String clicked = itemAtPosition.getEventName();
-                //Toast.makeText(getApplicationContext(),clicked, Toast.LENGTH_SHORT).show();
+//                String clicked = itemAtPosition.getEventName();
+//                Toast.makeText(getApplicationContext(),clicked, Toast.LENGTH_SHORT).show();
+
                 //click go to room list
                 Intent intent = new Intent(EventListing.this, LiveListing.class);
                 intent.putExtra("EVENT_ID", itemAtPosition.getEventID());
