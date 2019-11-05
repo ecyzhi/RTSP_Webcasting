@@ -23,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mercy.alpacalive.adapter.EventList;
 import com.mercy.alpacalive.adapter.EventListAdapter;
+import com.mercy.alpacalive.adapter.LiveList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -60,7 +61,7 @@ public class EventListing extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "No network", Toast.LENGTH_LONG).show();
         }
 
-        downloadBooking(getApplicationContext(), GET_URL);
+        loadEventList(getApplicationContext(), GET_URL);
 
 
         listEvent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -68,8 +69,13 @@ public class EventListing extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object object = parent.getItemAtPosition(position);
                 EventList itemAtPosition = (EventList) object;
-                String clickedEventID = itemAtPosition.getEventID();
-                Toast.makeText(getApplicationContext(),clickedEventID, Toast.LENGTH_SHORT).show();
+                String clicked = itemAtPosition.getEventName();
+                //Toast.makeText(getApplicationContext(),clicked, Toast.LENGTH_SHORT).show();
+                //click go to room list
+                Intent intent = new Intent(EventListing.this, LiveListing.class);
+                intent.putExtra("EVENT_ID", itemAtPosition.getEventID());
+                intent.putExtra("EVENT_NAME", itemAtPosition.getEventName());
+                startActivity(intent);
             }
         });
 
@@ -88,7 +94,7 @@ public class EventListing extends AppCompatActivity {
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 
-    private void downloadBooking(Context context, String url) {
+    private void loadEventList(Context context, String url) {
         // Instantiate the RequestQueue
         queue = Volley.newRequestQueue(context);
 
@@ -116,7 +122,7 @@ public class EventListing extends AppCompatActivity {
                                 dbeventlist.add(new EventList(eventID,eventName,location,start,end,details,roomCount));
 
                             }
-                            loadBooking();
+                            loadEvent();
                             if (pd.isShowing())
                                 pd.dismiss();
                         } catch (Exception e) {
@@ -140,7 +146,7 @@ public class EventListing extends AppCompatActivity {
         queue.add(jsonObjectRequest);
     }
 
-    private void loadBooking() {
+    private void loadEvent() {
         final EventListAdapter adapter = new EventListAdapter(this, R.layout.eventlisting_item, dbeventlist);
         listEvent.setAdapter(adapter);
         if(dbeventlist != null){
