@@ -53,7 +53,6 @@
         <activity
             android:name=".AddEvent"
             android:label="@string/title_activity_add_event" />
-        <activity android:name=".ViewLiveStream" />
         <activity
             android:name=".EventListing"
             android:label="@string/title_activity_event_listing"

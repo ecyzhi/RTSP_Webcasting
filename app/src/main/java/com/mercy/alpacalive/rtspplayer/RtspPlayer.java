@@ -53,7 +53,7 @@ public class RtspPlayer extends AppCompatActivity implements VlcListener, View.O
 
     @Override
     public void onError() {
-        Toast.makeText(this, "Error, make sure your endpoint is correct", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Error, nobody streaming from this room!", Toast.LENGTH_SHORT).show();
         vlcVideoLibrary.stop();
         bStartStop.setText(getString(R.string.start_player));
     }
