@@ -1,5 +1,6 @@
 package com.mercy.alpacalive;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +10,8 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +56,9 @@ public class LiveListing extends AppCompatActivity {
     private TextView eventName;
     ListView liveList;
     List<LiveList> dbLiveList;
+    Dialog inputDlg;
+    EditText roomnmget;
+    Button okBtn, cclBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,21 +94,49 @@ public class LiveListing extends AppCompatActivity {
         
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
+            String rmNm;
             @Override
             public void onClick(View view) {
-                roomCode = randomString(10);
-                roomUrl = "rtsp://" + serverIP + "/alpacalive/" + roomCode;
+                inputDlg = new Dialog(LiveListing.this);
+                inputDlg.setContentView(R.layout.request_room_name);
+                roomnmget = inputDlg.findViewById(R.id.etRoomName);
+                okBtn = inputDlg.findViewById(R.id.btnOk);
+                cclBtn = inputDlg.findViewById(R.id.btnCancel);
+                inputDlg.setTitle("Room Name Input");
 
-                //Test RoomName
-                roomName = retrievedUserName + " | " + retrievedEventName;
+                okBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        rmNm = roomnmget.getText().toString();
+                        //Toast.makeText(getApplicationContext(), rmNm,Toast.LENGTH_SHORT);
 
-                //Add the room to database
-                addLive(userID,eventID,roomCode,roomName);
+                        roomCode = randomString(10);
+                        roomUrl = "rtsp://" + serverIP + "/alpacalive/" + roomCode;
 
-                Intent intent = new Intent(LiveListing.this, ExampleRtspActivity.class);
-                intent.putExtra("ROOM_CODE_KEY", roomCode);
-                intent.putExtra("ROOM_URL_KEY", roomUrl);
-                startActivity(intent);
+                        //Test RoomName
+                        roomName = rmNm;
+
+                        //Add the room to database
+                        addLive(userID,eventID,roomCode,roomName);
+
+                        Intent intent = new Intent(LiveListing.this, ExampleRtspActivity.class);
+                        intent.putExtra("ROOM_CODE_KEY", roomCode);
+                        intent.putExtra("ROOM_URL_KEY", roomUrl);
+                        startActivity(intent);
+                        inputDlg.dismiss();
+                    }
+                });
+
+                cclBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        inputDlg.dismiss();
+                    }
+                });
+
+                //to show dialog
+                inputDlg.show();
+
             }
         });
 

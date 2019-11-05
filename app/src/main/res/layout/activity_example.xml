@@ -4,11 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+
   <SurfaceView
+      android:id="@+id/surfaceView"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:id="@+id/surfaceView"
-      />
+      android:background="@drawable/button_corner" />
 
   <EditText
       android:textColor="@color/appColor"
@@ -32,25 +33,28 @@
 
     <Button
         android:id="@+id/b_record"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="41dp"
         android:layout_marginRight="5dp"
-        android:background="@drawable/gradient_background"
+        android:background="@drawable/button_corner"
+        android:fontFamily="@font/amiko"
         android:text="@string/start_record" />
 
     <Button
         android:id="@+id/b_start_stop"
-        android:layout_width="125dp"
+        android:layout_width="120dp"
         android:layout_height="41dp"
         android:layout_marginRight="5dp"
-        android:background="@drawable/login_button"
+        android:background="@drawable/button_corner"
+        android:fontFamily="@font/amiko"
         android:text="@string/start_button" />
 
     <Button
         android:id="@+id/switch_camera"
-        android:layout_width="135dp"
-        android:layout_height="37dp"
-        android:background="@drawable/signup_button"
+        android:layout_width="120dp"
+        android:layout_height="41dp"
+        android:background="@drawable/button_corner"
+        android:fontFamily="@font/amiko"
         android:text="@string/switch_camera_button" />
   </LinearLayout>
 </RelativeLayout>
