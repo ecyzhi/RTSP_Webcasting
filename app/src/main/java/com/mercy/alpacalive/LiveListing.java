@@ -7,6 +7,13 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -14,24 +21,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.mercy.alpacalive.adapter.EventList;
-import com.mercy.alpacalive.adapter.EventListAdapter;
+import com.google.android.material.snackbar.Snackbar;
 import com.mercy.alpacalive.adapter.LiveList;
 import com.mercy.alpacalive.adapter.LiveListAdapter;
 import com.mercy.alpacalive.defaultexample.ExampleRtspActivity;
-import com.mercy.alpacalive.R;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.View;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -42,10 +38,9 @@ public class LiveListing extends AppCompatActivity {
     private SharedPreferences sharedPref;
     public static final String TAG = "com.mercy.alpacalive";
     private String sharedPrefFile = "com.mercy.alpacalive";
-    private static String GET_URL = "http://192.168.0.137:8080/alpacalive/SelectLive.php";
+    private String GET_URL = "";
     private ProgressDialog pd;
     RequestQueue queue;
-    private String serverIP = "192.168.0.137";
     private String roomCode = "";
     private String roomUrl = "";
     private TextView eventName;
@@ -60,6 +55,9 @@ public class LiveListing extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         sharedPref = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+        final String serverIP = sharedPref.getString("SERVER_IP","");
+        GET_URL = "http://" + serverIP + ":8080/alpacalive/SelectLive.php";
+
         liveList = findViewById(R.id.live_list);
         pd = new ProgressDialog(this);
         dbLiveList = new ArrayList<>();
@@ -78,8 +76,8 @@ public class LiveListing extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
 
                 roomCode = randomString(10);
                 roomUrl = "rtsp://" + serverIP + "/alpacalive/" + roomCode;

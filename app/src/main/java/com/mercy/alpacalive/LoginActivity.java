@@ -30,9 +30,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPref;
     private String sharedPrefFile = "com.mercy.alpacalive";
+
     private EditText usermail, userpass;
     private Button btnLogin;
-    private static String URL_LOGIN = "http://192.168.0.137:8080/alpacalive/UserLogin.php";
+    private static String URL_LOGIN;
 
 
     @Override
@@ -58,6 +59,11 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+        sharedPref = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+        String serverIP = sharedPref.getString("SERVER_IP","");
+        URL_LOGIN = "http://" + serverIP + ":8080/alpacalive/UserLogin.php";
 
     }
 

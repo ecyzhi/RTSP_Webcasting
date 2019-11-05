@@ -23,7 +23,6 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mercy.alpacalive.adapter.EventList;
 import com.mercy.alpacalive.adapter.EventListAdapter;
-import com.mercy.alpacalive.adapter.LiveList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,7 +35,7 @@ public class EventListing extends AppCompatActivity {
     private SharedPreferences sharedPref;
     public static final String TAG = "com.mercy.alpacalive";
     private String sharedPrefFile = "com.mercy.alpacalive";
-    private static String GET_URL = "http://192.168.0.137:8080/alpacalive/SelectEvent.php";
+    private static String GET_URL;
     private ProgressDialog pd;
     RequestQueue queue;
     ListView listEvent;
@@ -51,9 +50,14 @@ public class EventListing extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         sharedPref = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+        String serverIP = sharedPref.getString("SERVER_IP","");
+        GET_URL = "http://" + serverIP + ":8080/alpacalive/SelectEvent.php";
+
         listEvent = findViewById(R.id.list_event);
         pd = new ProgressDialog(this);
         dbeventlist = new ArrayList<>();
+
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
 
