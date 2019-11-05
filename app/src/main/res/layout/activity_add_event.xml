@@ -14,65 +14,10 @@
         android:layout_above="@+id/txtEventName"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="95dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="80dp"
         android:layout_marginBottom="15dp"
         android:text="@string/event_name"
-        android:textAppearance="@style/add_event_label" />
-
-    <TextView
-        android:id="@+id/lblLocation"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtEventLocation"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginEnd="98dp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/amiko"
-        android:text="@string/event_location"
-        android:textAppearance="@style/add_event_label"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/lblStart"
-        android:layout_width="291dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtStartDate"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="21dp"
-        android:layout_marginEnd="99dp"
-        android:layout_marginBottom="22dp"
-        android:text="@string/event_start"
-        android:textAppearance="@style/add_event_label" />
-
-    <TextView
-        android:id="@+id/lblEnd"
-        android:layout_width="291dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtEndDate"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="90dp"
-        android:layout_marginBottom="5dp"
-        android:text="@string/event_end"
-        android:textAppearance="@style/add_event_label"
-        tools:text="@string/event_end" />
-
-    <TextView
-        android:id="@+id/lblDetails"
-        android:layout_width="291dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtDetails"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="95dp"
-        android:layout_marginBottom="14dp"
-        android:text="@string/event_details"
         android:textAppearance="@style/add_event_label" />
 
     <EditText
@@ -82,40 +27,27 @@
         android:layout_above="@+id/lblLocation"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginEnd="98dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="20dp"
         android:background="@color/colorWhite"
         android:ems="10"
         android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/txtEndDate"
-        android:layout_width="301dp"
-        android:layout_height="34dp"
-        android:layout_above="@+id/lblDetails"
+    <TextView
+        android:id="@+id/lblLocation"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtEventLocation"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="27dp"
-        android:layout_marginEnd="93dp"
-        android:layout_marginBottom="7dp"
-        android:background="@color/colorWhite"
-        android:ems="10"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/txtDetails"
-        android:layout_width="301dp"
-        android:layout_height="34dp"
-        android:layout_above="@+id/btnConfirm"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="31dp"
-        android:layout_marginEnd="89dp"
-        android:layout_marginBottom="40dp"
-        android:background="@color/colorWhite"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/amiko"
+        android:text="@string/event_location"
+        android:textAppearance="@style/add_event_label"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/txtEventLocation"
@@ -124,12 +56,117 @@
         android:layout_above="@+id/lblStart"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="40dp"
         android:layout_marginEnd="95dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="20dp"
         android:background="@color/colorWhite"
         android:ems="10"
         android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/lblStart"
+        android:layout_width="291dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtStartDate"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/event_start"
+        android:textAppearance="@style/add_event_label" />
+
+    <TextView
+        android:id="@+id/txtStartDate"
+        android:layout_width="301dp"
+        android:layout_height="34dp"
+        android:layout_above="@+id/lblEnd"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/colorWhite"
+        android:textAppearance="@style/add_event_label" />
+
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="34dp"
+        android:layout_height="28dp"
+        android:layout_above="@+id/lblEnd"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/ic_calendar"
+        android:inputType="none" />
+
+    <TextView
+        android:id="@+id/lblEnd"
+        android:layout_width="291dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtEndDate"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/event_end"
+        android:textAppearance="@style/add_event_label"
+        tools:text="@string/event_end" />
+
+    <TextView
+        android:id="@+id/txtEndDate"
+        android:layout_width="301dp"
+        android:layout_height="34dp"
+        android:layout_above="@+id/lblDetails"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/colorWhite"
+        android:ems="10"
+        android:inputType="none"
+        android:textAppearance="@style/add_event_label" />
+
+    <Button
+        android:id="@+id/btnEnd"
+        android:layout_width="34dp"
+        android:layout_height="28dp"
+        android:layout_above="@+id/lblDetails"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/ic_calendar"
+        android:inputType="none" />
+
+    <TextView
+        android:id="@+id/lblDetails"
+        android:layout_width="291dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtDetails"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="92dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/event_details"
+        android:textAppearance="@style/add_event_label" />
+
+    <EditText
+        android:id="@+id/txtDetails"
+        android:layout_width="301dp"
+        android:layout_height="34dp"
+        android:layout_above="@+id/btnConfirm"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="40dp"
+        android:background="@color/colorWhite"
+        android:ems="10"
+        android:inputType="none" />
+
 
     <Button
         android:id="@+id/btnConfirm"
@@ -138,35 +175,12 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="126dp"
-        android:layout_marginEnd="177dp"
-        android:layout_marginBottom="23dp"
+        android:layout_marginStart="129dp"
+        android:layout_marginEnd="174dp"
+        android:layout_marginBottom="70dp"
         android:background="@drawable/login_button"
         android:onClick="addEventtoDB"
         android:text="@string/confirm" />
-
-    <EditText
-        android:id="@+id/txtStartDate"
-        android:layout_width="279dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/lblEnd"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="25dp"
-        android:background="@color/colorWhite"
-        android:textAppearance="@style/add_event_label" />
-
-    <ImageButton
-        android:id="@+id/imgbtnStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/lblEnd"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="91dp"
-        android:layout_marginBottom="17dp"
-        app:srcCompat="@drawable/ic_calendar" />
 
 
 </RelativeLayout>
