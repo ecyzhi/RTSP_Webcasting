@@ -1,5 +1,7 @@
 package com.mercy.alpacalive;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,16 +18,16 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.mercy.alpacalive.adapter.LiveList;
 import com.mercy.alpacalive.adapter.LiveListAdapter;
-import com.mercy.alpacalive.defaultexample.ExampleRtspActivity;
 import com.mercy.alpacalive.rtspplayer.RtspPlayer;
 
 import org.json.JSONArray;
@@ -33,7 +35,9 @@ import org.json.JSONObject;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LiveListing extends AppCompatActivity {
 
@@ -41,10 +45,12 @@ public class LiveListing extends AppCompatActivity {
     public static final String TAG = "com.mercy.alpacalive";
     private String sharedPrefFile = "com.mercy.alpacalive";
     private String GET_URL = "";
+    private String ADD_LIVE_URL = "";
     private ProgressDialog pd;
     RequestQueue queue;
     private String roomCode = "";
     private String roomUrl = "";
+    private String roomName = "";
     private TextView eventName;
     ListView liveList;
     List<LiveList> dbLiveList;
@@ -59,10 +65,11 @@ public class LiveListing extends AppCompatActivity {
         sharedPref = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
         final String serverIP = sharedPref.getString("SERVER_IP","");
         GET_URL = "http://" + serverIP + ":8080/alpacalive/SelectLive.php";
+        ADD_LIVE_URL = "http://" + serverIP + ":8080/alpacalive/InsertLive.php";
 
         //Get eventID, userID for adding into database when streamer open new room
-        String userID = sharedPref.getString("USER_ID","");
-        String eventID = getIntent().getExtras().getString("EVENT_ID","");
+        final String userID = sharedPref.getString("USER_ID","");
+        final String eventID = getIntent().getExtras().getString("EVENT_ID","");
 
 
         liveList = findViewById(R.id.live_list);
@@ -83,19 +90,74 @@ public class LiveListing extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+
+                ViewDialog alert = new ViewDialog();
+                alert.showDialog(LiveListing.this);
+
+
 
                 roomCode = randomString(10);
                 roomUrl = "rtsp://" + serverIP + "/alpacalive/" + roomCode;
 
+
+
+                //Prompt for room name
+
+//                AlertDialog.Builder builder = new AlertDialog.Builder(LiveListing.this);
+//                builder.setTitle("Room Name");
+//
+//                View viewInflated = LayoutInflater.from(LiveListing.this).inflate(R.layout.dialog_room_name, null);
+//
+//                final EditText input = (EditText) viewInflated.findViewById(R.id.input_room_name);
+//                builder.setView(viewInflated);
+//                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                        roomName = input.getText().toString();
+//                    }
+//                });
+//                builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.cancel();
+//                    }
+//                });
+//
+//                builder.show();
+
+
+
+                Toast.makeText(getApplicationContext(),roomName, Toast.LENGTH_SHORT).show();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 //Add the room to database
-
-
-                Intent intent = new Intent(LiveListing.this, ExampleRtspActivity.class);
-                intent.putExtra("ROOM_CODE_KEY", roomCode);
-                intent.putExtra("ROOM_URL_KEY", roomUrl);
-                startActivity(intent);
+//                addLive(userID,eventID,roomCode,roomName);
+//
+//                Intent intent = new Intent(LiveListing.this, ExampleRtspActivity.class);
+//                intent.putExtra("ROOM_CODE_KEY", roomCode);
+//                intent.putExtra("ROOM_URL_KEY", roomUrl);
+//                startActivity(intent);
             }
         });
 
@@ -116,6 +178,30 @@ public class LiveListing extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public class ViewDialog {
+
+        public void showDialog(Activity activity){
+            final Dialog dialog = new Dialog(activity);
+            dialog.setTitle("Please enter a room name: ");
+            dialog.setCancelable(false);
+            dialog.setContentView(R.layout.dialog_room_name);
+
+//            TextView text = (TextView) dialog.findViewById(R.id.text_dialog);
+//            text.setText(msg);
+
+//            Button dialogButton = dialog.findViewById(R.id.fab);
+//            dialogButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    dialog.dismiss();
+//                }
+//            });
+
+            dialog.show();
+
+        }
     }
 
     private boolean isConnected(){
@@ -202,5 +288,35 @@ public class LiveListing extends AppCompatActivity {
             else
                 Toast.makeText(getApplicationContext(), "No record found.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+
+//TODO: Add new live room to database
+    private void addLive(final String userID, final String eventID, final String roomCode, final String roomName){
+
+        StringRequest strReq = new StringRequest(Request.Method.POST, ADD_LIVE_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(LiveListing.this, "New Live Room added into database.", Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(LiveListing.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("userID", userID);
+                params.put("eventID", eventID);
+                params.put("roomCode", roomCode);
+                params.put("roomName", roomName);
+                return params;
+            }
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(LiveListing.this);
+        requestQueue.add(strReq);
     }
 }

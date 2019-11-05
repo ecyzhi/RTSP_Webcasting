@@ -2,6 +2,7 @@ package com.mercy.alpacalive;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,13 +30,16 @@ public class AddEvent extends AppCompatActivity {
     private EditText eventName, eventLocation, eventDetails;
     private TextView startDate, endDate;
 
+    private SharedPreferences sharedPref;
+    private String sharedPrefFile = "com.mercy.alpacalive";
+    private String GET_URL = "";
+
     private Calendar calendar;
     private int year, month, day;
     DatePickerDialog dpd;
 
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
-    String URL = "http://192.168.0.137:8080/alpacalive/InsertEvent.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,10 @@ public class AddEvent extends AppCompatActivity {
         eventDetails = findViewById(R.id.txtDetails);
 
         this.showDatePickerDialog();
+
+        sharedPref = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+        final String serverIP = sharedPref.getString("SERVER_IP","");
+        GET_URL = "http://" + serverIP + ":8080/alpacalive/InsertEvent.php";
 
     }
 
@@ -159,7 +167,7 @@ public class AddEvent extends AppCompatActivity {
     }
 
     private void valueGetFrom(final String name, final String location, final String start, final String end, final String details) {
-        StringRequest strReq = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(Request.Method.POST, GET_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 //                progressDialog.dismiss();

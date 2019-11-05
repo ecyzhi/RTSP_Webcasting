@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -40,6 +41,8 @@ public class EventListing extends AppCompatActivity {
     RequestQueue queue;
     ListView listEvent;
     List<EventList> dbeventlist;
+    EventListAdapter adapter;
+    private Button btnRefresh;
 
 
     @Override
@@ -54,6 +57,14 @@ public class EventListing extends AppCompatActivity {
         GET_URL = "http://" + serverIP + ":8080/alpacalive/SelectEvent.php";
 
         listEvent = findViewById(R.id.list_event);
+        btnRefresh = findViewById(R.id.btnRefresh);
+        btnRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadEventList(getApplicationContext(), GET_URL);
+                adapter.notifyDataSetChanged();
+            }
+        });
         pd = new ProgressDialog(this);
         dbeventlist = new ArrayList<>();
 
@@ -152,7 +163,7 @@ public class EventListing extends AppCompatActivity {
     }
 
     private void loadEvent() {
-        final EventListAdapter adapter = new EventListAdapter(this, R.layout.eventlisting_item, dbeventlist);
+        adapter = new EventListAdapter(this, R.layout.eventlisting_item, dbeventlist);
         listEvent.setAdapter(adapter);
         if(dbeventlist != null){
             int size = dbeventlist.size();
@@ -163,4 +174,8 @@ public class EventListing extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 }
