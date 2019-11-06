@@ -146,6 +146,9 @@ public class ExampleRtspActivity extends AppCompatActivity
         } else {
           button.setText(R.string.start_button);
           rtspCamera1.stopStream();
+
+          finish();
+//          TODO: redirect back to live listing, delete row in database
         }
         break;
       case R.id.switch_camera:

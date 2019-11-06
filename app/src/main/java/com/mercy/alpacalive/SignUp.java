@@ -1,8 +1,5 @@
 package com.mercy.alpacalive;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -10,12 +7,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,8 +36,8 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        sharedPref = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
-        String serverIP = sharedPref.getString("SERVER_IP","");
+        sharedPref = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
+        String serverIP = sharedPref.getString("SERVER_IP", "");
         GET_URL = "http://" + serverIP + ":8080/alpacalive/InsertUser.php";
 
 
@@ -51,7 +53,7 @@ public class SignUp extends AppCompatActivity {
                 String usermail = email.getText().toString();
                 String pwd = password.getText().toString();
 
-                signUp(username,usermail,pwd);
+                signUp(username, usermail, pwd);
                 finish();
 
             }
@@ -62,8 +64,20 @@ public class SignUp extends AppCompatActivity {
         StringRequest strReq = new StringRequest(Request.Method.POST, GET_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String message = jsonObject.getString("message");
+
+                    Toast.makeText(SignUp.this, message, Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(SignUp.this,
+                            "JSON Error " + response, Toast.LENGTH_SHORT).show();
+                }
+
+//                    Toast.makeText(SignUp.this, "Added successfully", Toast.LENGTH_SHORT).show();
 //                progressDialog.dismiss();
-                Toast.makeText(SignUp.this, "User added successful.", Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
