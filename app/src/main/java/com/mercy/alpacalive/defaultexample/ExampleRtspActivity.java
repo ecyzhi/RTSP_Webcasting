@@ -1,5 +1,6 @@
 package com.mercy.alpacalive.defaultexample;
 
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -12,17 +13,29 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.mercy.encoder.input.video.CameraOpenException;
 import com.mercy.rtplibrary.base.Camera1Base;
 import com.mercy.rtplibrary.rtsp.RtspCamera1;
 import com.mercy.rtsp.utils.ConnectCheckerRtsp;
 import com.mercy.alpacalive.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * More documentation see:
@@ -36,6 +49,10 @@ public class ExampleRtspActivity extends AppCompatActivity
   private Button button;
   private Button bRecord;
   private EditText etUrl;
+
+  private String DELETE_LIVE_URL = "";
+  private SharedPreferences sharedPref;
+  private String sharedPrefFile = "com.mercy.alpacalive";
 
   private String currentDateAndTime = "";
   private File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
@@ -58,6 +75,11 @@ public class ExampleRtspActivity extends AppCompatActivity
     rtspCamera1 = new RtspCamera1(surfaceView, this);
     rtspCamera1.setReTries(10);
     surfaceView.getHolder().addCallback(this);
+
+
+    sharedPref = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+    final String serverIP = sharedPref.getString("SERVER_IP","");
+    DELETE_LIVE_URL = "http://" + serverIP + ":8080/alpacalive/DeleteLive.php";
 
     // Entering generated rtsp url automatically
     String roomUrl = getIntent().getExtras().getString("ROOM_URL_KEY","Error");
@@ -147,8 +169,10 @@ public class ExampleRtspActivity extends AppCompatActivity
           button.setText(R.string.start_button);
           rtspCamera1.stopStream();
 
-          finish();
 //          TODO: redirect back to live listing, delete row in database
+          deleteRoom();
+          finish();
+
         }
         break;
       case R.id.switch_camera:
@@ -230,5 +254,46 @@ public class ExampleRtspActivity extends AppCompatActivity
       button.setText(getResources().getString(R.string.start_button));
     }
     rtspCamera1.stopPreview();
+  }
+
+
+
+  // Delete row after streamer stop streaming
+  private void deleteRoom(){
+    final String roomCode = getIntent().getExtras().getString("ROOM_CODE_KEY","Error");
+
+    StringRequest stringRequest = new StringRequest(Request.Method.POST, DELETE_LIVE_URL, new Response.Listener<String>() {
+      @Override
+      public void onResponse(String response) {
+        try {
+          JSONObject jsonObject = new JSONObject(response);
+          String success = jsonObject.getString("success");
+
+          if(success.equals("1")){
+//            Toast.makeText(ExampleRtspActivity.this, "Room Deleted",Toast.LENGTH_SHORT).show();
+          }
+        } catch (JSONException e) {
+          e.printStackTrace();
+          Toast.makeText(ExampleRtspActivity.this,"JSONError" + e.toString(), Toast.LENGTH_SHORT).show();
+        }
+
+      }
+    }, new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        Toast.makeText(ExampleRtspActivity.this,"VolleyError" + error.toString(), Toast.LENGTH_SHORT).show();
+      }
+    })
+    {
+      @Override
+      protected Map<String, String> getParams() throws AuthFailureError {
+        Map<String, String> params = new HashMap<>();
+        params.put("roomCode",roomCode) ;
+        return params;
+      }
+    };
+
+    RequestQueue requestQueue = Volley.newRequestQueue(this);
+    requestQueue.add(stringRequest);
   }
 }
