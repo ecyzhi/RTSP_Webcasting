@@ -1,5 +1,6 @@
 package com.mercy.alpacalive.rtspplayer;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.SurfaceView;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.mercy.vlc.VlcVideoLibrary;
 import org.videolan.libvlc.MediaPlayer;
 
 import java.util.Arrays;
+
 
 /**
  * Created by pedro on 25/06/17.
@@ -40,6 +42,7 @@ public class RtspPlayer extends AppCompatActivity implements VlcListener, View.O
         etEndpoint = (EditText) findViewById(R.id.et_endpoint);
         vlcVideoLibrary = new VlcVideoLibrary(this, this, surfaceView);
         vlcVideoLibrary.setOptions(Arrays.asList(options));
+
 
         // Entering generated rtsp url automatically
         String roomUrl = getIntent().getExtras().getString("ROOM_URL_KEY","Error");

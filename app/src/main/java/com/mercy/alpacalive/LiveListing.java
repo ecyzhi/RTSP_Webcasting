@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -56,9 +57,11 @@ public class LiveListing extends AppCompatActivity {
     private TextView eventName;
     ListView liveList;
     List<LiveList> dbLiveList;
+    LiveListAdapter adapter;
     Dialog inputDlg;
     EditText roomnmget;
     Button okBtn, cclBtn;
+    private SwipeRefreshLayout livesr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +92,20 @@ public class LiveListing extends AppCompatActivity {
         if (!isConnected()) {
             Toast.makeText(getApplicationContext(), "No network", Toast.LENGTH_LONG).show();
         }
+
+        livesr = findViewById(R.id.refreshlive);
+        livesr.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadLiveList(getApplicationContext(), GET_URL);
+                //adapter.notifyDataSetChanged();
+
+                if (livesr.isRefreshing()){
+                    livesr.setRefreshing(false);
+                }
+            }
+        });
+
 
         loadLiveList(getApplicationContext(), GET_URL);
         

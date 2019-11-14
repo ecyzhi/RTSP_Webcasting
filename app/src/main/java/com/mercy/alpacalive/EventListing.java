@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -43,6 +44,7 @@ public class EventListing extends AppCompatActivity {
     List<EventList> dbeventlist;
     EventListAdapter adapter;
     private Button btnRefresh;
+    private SwipeRefreshLayout sr;
 
 
     @Override
@@ -56,6 +58,19 @@ public class EventListing extends AppCompatActivity {
         String serverIP = sharedPref.getString("SERVER_IP","");
         GET_URL = "http://" + serverIP + ":8080/alpacalive/SelectEvent.php";
 
+        sr = findViewById(R.id.swiperefresh);
+        sr.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadEventList(getApplicationContext(), GET_URL);
+                adapter.notifyDataSetChanged();
+
+                if (sr.isRefreshing()) {
+                    sr.setRefreshing(false);
+                }
+            }
+        });
+
         listEvent = findViewById(R.id.list_event);
         btnRefresh = findViewById(R.id.btnRefresh);
         btnRefresh.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +82,7 @@ public class EventListing extends AppCompatActivity {
         });
         pd = new ProgressDialog(this);
         dbeventlist = new ArrayList<>();
+
 
 
 
