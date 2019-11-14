@@ -1,5 +1,6 @@
 package com.mercy.alpacalive.rtspplayer;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.SurfaceView;
@@ -35,9 +36,14 @@ public class RtspPlayer extends AppCompatActivity implements VlcListener, View.O
     List<String> dbRoomCodeList = new ArrayList<>();
     List<String> roomCodeArray;
     private int position = -1;
+    private Button btnPrevious;
+    private Button btnNext;
 
     private SharedPreferences sharedPref;
     private String sharedPrefFile = "com.mercy.alpacalive";
+
+    String strRoomCodeList = "";
+    String roomUrl = "";
 
 
     @Override
@@ -54,6 +60,9 @@ public class RtspPlayer extends AppCompatActivity implements VlcListener, View.O
         vlcVideoLibrary = new VlcVideoLibrary(this, this, surfaceView);
         vlcVideoLibrary.setOptions(Arrays.asList(options));
 
+        btnPrevious = findViewById(R.id.btnPrevious);
+        btnNext = findViewById(R.id.btnNext);
+
         sharedPref = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
         final String serverIP = sharedPref.getString("SERVER_IP","");
 
@@ -61,7 +70,7 @@ public class RtspPlayer extends AppCompatActivity implements VlcListener, View.O
 
 
         // Split the room code string into list
-        String strRoomCodeList = getIntent().getExtras().getString("ROOM_CODE_LIST_KEY","");
+        strRoomCodeList = getIntent().getExtras().getString("ROOM_CODE_LIST_KEY","");
         String[] items = strRoomCodeList.split("\\s*,\\s*");
         roomCodeArray = Arrays.asList(items);
 
@@ -72,19 +81,60 @@ public class RtspPlayer extends AppCompatActivity implements VlcListener, View.O
 
         checkPosition();
 
-        etEndpoint.setText(""+position);
-
-
-
 
         // Entering generated rtsp url automatically
-        String roomUrl = getIntent().getExtras().getString("ROOM_URL_KEY","Error");
-//        etEndpoint.setText(roomUrl);
+        roomUrl = getIntent().getExtras().getString("ROOM_URL_KEY","Error");
+        etEndpoint.setText(roomUrl);
 
 
-//        Test for string room code list
-//        etEndpoint.setText(dbRoomCodeList.size());
-//        etEndpoint.setText(getIntent().getExtras().getString("ROOM_CODE_LIST_KEY",""));
+
+        // Onclick listener for previous and next button
+        btnPrevious.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if((position - 1) >= 0){
+//                    etEndpoint.setText("rtsp://" + serverIP + "/alpacalive/" + dbRoomCodeList.get(position-1));
+//                    position--;
+
+                    roomUrl = "rtsp://" + serverIP + "/alpacalive/" + dbRoomCodeList.get(position-1);
+                    Intent intent = new Intent(RtspPlayer.this, RtspPlayer.class);
+                    intent.putExtra("ROOM_URL_KEY", roomUrl);
+                    intent.putExtra("EVENT_ID", getIntent().getExtras().getString("EVENT_ID","Error"));
+                    intent.putExtra("ROOM_CODE_LIST_KEY", strRoomCodeList);
+                    intent.putExtra("ROOM_CODE_KEY", dbRoomCodeList.get(position-1));
+                    startActivity(intent);
+
+                    overridePendingTransition(R.transition.slide_in_left, R.transition.slide_out_right);
+                    finish();
+                }else{
+                    Toast.makeText(getApplicationContext(), "This is the first room", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if((position + 1) < dbRoomCodeList.size()){
+//                    etEndpoint.setText("rtsp://" + serverIP + "/alpacalive/" + dbRoomCodeList.get(position+1));
+//                    position++;
+
+                    roomUrl = "rtsp://" + serverIP + "/alpacalive/" + dbRoomCodeList.get(position+1);
+                    Intent intent = new Intent(RtspPlayer.this, RtspPlayer.class);
+                    intent.putExtra("ROOM_URL_KEY", roomUrl);
+                    intent.putExtra("EVENT_ID", getIntent().getExtras().getString("EVENT_ID","Error"));
+                    intent.putExtra("ROOM_CODE_LIST_KEY", strRoomCodeList);
+                    intent.putExtra("ROOM_CODE_KEY", dbRoomCodeList.get(position+1));
+                    startActivity(intent);
+
+                    overridePendingTransition(R.transition.slide_in_right, R.transition.slide_out_left);
+                    finish();
+                }else{
+                    Toast.makeText(getApplicationContext(), "This is the last room", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
     @Override
@@ -114,8 +164,6 @@ public class RtspPlayer extends AppCompatActivity implements VlcListener, View.O
             bStartStop.setText(getString(R.string.start_player));
         }
     }
-
-    // TODO: Change the room url when detecting swipe gesture
 
     private void checkPosition(){
         for(int i = 0 ; i < dbRoomCodeList.size(); i++){

@@ -23,16 +23,40 @@
 
   <Button
       android:id="@+id/b_start_stop"
-      android:layout_width="wrap_content"
+      android:layout_width="200dp"
       android:layout_height="wrap_content"
       android:layout_alignParentBottom="true"
-      android:layout_centerHorizontal="true"
-      android:layout_marginStart="20dp"
+      android:layout_toRightOf="@id/btnPrevious"
+      android:layout_toLeftOf="@id/btnNext"
+      android:layout_marginStart="40dp"
       android:layout_marginTop="20dp"
-      android:layout_marginEnd="20dp"
       android:layout_marginBottom="20dp"
+      android:layout_marginEnd="40dp"
       android:background="@drawable/login_button"
       android:text="@string/start_player"
+      android:textAppearance="@style/add_event_label" />
+  <Button
+    android:id="@+id/btnPrevious"
+    android:layout_width="50dp"
+    android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_alignParentLeft="true"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+    android:background="@drawable/ic_action_previous"
+    android:textAppearance="@style/add_event_label" />
+
+  <Button
+      android:id="@+id/btnNext"
+      android:layout_width="50dp"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_alignParentRight="true"
+      android:layout_marginEnd="20dp"
+      android:layout_marginTop="20dp"
+      android:layout_marginBottom="20dp"
+      android:background="@drawable/ic_action_next"
       android:textAppearance="@style/add_event_label" />
 
 </RelativeLayout>

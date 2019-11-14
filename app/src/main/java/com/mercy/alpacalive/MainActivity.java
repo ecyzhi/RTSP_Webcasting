@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    overridePendingTransition(R.transition.slide_in, R.transition.slide_out);
+//    overridePendingTransition(R.transition.slide_in_right, R.transition.slide_out_left);
     TextView tvVersion = findViewById(R.id.tv_version);
     tvVersion.setText(getString(R.string.version, BuildConfig.VERSION_NAME));
 
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
       int minSdk = link.getMinSdk();
       if (Build.VERSION.SDK_INT >= minSdk) {
         startActivity(link.getIntent());
-        overridePendingTransition(R.transition.slide_in, R.transition.slide_out);
+//        overridePendingTransition(R.transition.slide_in_right, R.transition.slide_out_left);
       } else {
         showMinSdkError(minSdk);
       }
