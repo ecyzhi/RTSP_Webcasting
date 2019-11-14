@@ -62,6 +62,7 @@ public class LiveListing extends AppCompatActivity {
     EditText roomnmget;
     Button okBtn, cclBtn;
     private SwipeRefreshLayout livesr;
+    private String strRoomCodeList = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,6 +171,9 @@ public class LiveListing extends AppCompatActivity {
                 roomUrl = "rtsp://" + serverIP + "/alpacalive/" + itemAtPosition.getRoomCode();
                 Intent intent = new Intent(LiveListing.this, RtspPlayer.class);
                 intent.putExtra("ROOM_URL_KEY", roomUrl);
+                intent.putExtra("EVENT_ID", eventID);
+                intent.putExtra("ROOM_CODE_LIST_KEY", strRoomCodeList);
+                intent.putExtra("ROOM_CODE_KEY", itemAtPosition.getRoomCode());
                 startActivity(intent);
             }
         });
@@ -221,8 +225,10 @@ public class LiveListing extends AppCompatActivity {
 
                                 String strEventID = "" + eventID;
 
-                                if(strEventID.equals(getIntent().getExtras().getString("EVENT_ID","")))
-                                    dbLiveList.add(new LiveList(userID,eventID,roomCode,roomName,viewerCount));
+                                if(strEventID.equals(getIntent().getExtras().getString("EVENT_ID",""))) {
+                                    dbLiveList.add(new LiveList(userID, eventID, roomCode, roomName, viewerCount));
+                                    strRoomCodeList = strRoomCodeList + roomCode + ",";
+                                }
 
                             }
                             loadLive();
@@ -263,7 +269,7 @@ public class LiveListing extends AppCompatActivity {
 
 
 
-//TODO: Add new live room to database
+//TODO: Add new live room to database, with position*(Updated)
     private void addLive(final String userID, final String eventID, final String roomCode, final String roomName){
 
         StringRequest strReq = new StringRequest(Request.Method.POST, ADD_LIVE_URL, new Response.Listener<String>() {
