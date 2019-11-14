@@ -168,8 +168,7 @@ public class ExampleRtspActivity extends AppCompatActivity
         } else {
           button.setText(R.string.start_button);
           rtspCamera1.stopStream();
-
-//          TODO: redirect back to live listing, delete row in database
+          
           deleteRoom();
           finish();
 
