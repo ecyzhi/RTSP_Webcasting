@@ -1,17 +1,12 @@
-# rtmp-rtsp-stream-client-java
+# college project for community webcasting using RTSP
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-rtmp%20rtsp%20stream%20client%20java-green.svg?style=true)](https://android-arsenal.com/details/1/5333)
 [![Release](https://jitpack.io/v/pedroSG94/rtmp-rtsp-stream-client-java.svg)](https://jitpack.io/#pedroSG94/rtmp-rtsp-stream-client-java)
 
 Library for stream in RTMP and RTSP. All code in Java.
 
-If you need a player see this project:
-
-https://github.com/pedroSG94/vlc-example-streamplayer
-
-## Wiki
-
-https://github.com/pedroSG94/rtmp-rtsp-stream-client-java/wiki
+# Owner : Pedro Sánchez (pedroSG94) 
+https://github.com/pedroSG94/rtmp-rtsp-stream-client-java
 
 ## Permissions:
 
@@ -69,39 +64,6 @@ dependencies {
 
 This code is a basic example.
 I recommend you go to Activities in app module and see all examples.
-
-### RTMP:
-
-```java
-
-//default
-
-//create builder
-RtmpCamera1 rtmpCamera1 = new RtmpCamera1(surfaceView, connectCheckerRtmp);
-//start stream
-if (rtmpCamera1.prepareAudio() && rtmpCamera1.prepareVideo()) {
-  rtmpCamera1.startStream("rtmp://yourEndPoint");
-} else {
- /**This device cant init encoders, this could be for 2 reasons: The encoder selected doesnt support any configuration setted or your device hasnt a H264 or AAC encoder (in this case you can see log error valid encoder not found)*/
-}
-//stop stream
-rtmpCamera1.stopStream();
-
-//with params
-
-//create builder
-RtmpCamera1 rtmpCamera1 = new RtmpCamera1(surfaceView, connectCheckerRtmp);
-//start stream
-if (rtmpCamera1.prepareAudio(int bitrate, int sampleRate, boolean isStereo, boolean echoCanceler,
-      boolean noiseSuppressor) && rtmpCamera1.prepareVideo(int width, int height, int fps, int bitrate, boolean hardwareRotation, int rotation)) {
-  rtmpCamera1.startStream("rtmp://yourEndPoint");
-} else {
- /**This device cant init encoders, this could be for 2 reasons: The encoder selected doesnt support any configuration setted or your device hasnt a H264 or AAC encoder (in this case you can see log error valid encoder not found)*/
-}
-//stop stream
-rtmpCamera1.stopStream();
-
-```
 
 ### RTSP:
 
