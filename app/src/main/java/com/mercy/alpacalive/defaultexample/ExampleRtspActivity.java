@@ -168,7 +168,7 @@ public class ExampleRtspActivity extends AppCompatActivity
         } else {
           button.setText(R.string.start_button);
           rtspCamera1.stopStream();
-          
+
           deleteRoom();
           finish();
 

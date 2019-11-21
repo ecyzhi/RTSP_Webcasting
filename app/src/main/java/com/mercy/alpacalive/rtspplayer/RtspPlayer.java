@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +39,7 @@ public class RtspPlayer extends AppCompatActivity implements VlcListener, View.O
     private int position = -1;
     private Button btnPrevious;
     private Button btnNext;
+    private ProgressBar progressBar;
 
     private SharedPreferences sharedPref;
     private String sharedPrefFile = "com.mercy.alpacalive";
@@ -151,7 +153,8 @@ public class RtspPlayer extends AppCompatActivity implements VlcListener, View.O
 
     @Override
     public void onBuffering(MediaPlayer.Event event) {
-
+        progressBar=findViewById(R.id.pgBar);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
