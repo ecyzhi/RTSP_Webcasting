@@ -40,10 +40,10 @@ public class EventListAdapter extends ArrayAdapter<EventList> {
         roomCount = rowView.findViewById(R.id.roomCount);
 
         eventName.setText(eventList.getEventName());
-        eventLoc.setText(eventList.getEventLocation());
-        startDate.setText(eventList.getEventStartDate());
-        endDate.setText(eventList.getEventEndDate());
-        details.setText(eventList.getEventDetail());
+        eventLoc.setText("Venue: " + eventList.getEventLocation());
+        startDate.setText("Event Begin at: " + eventList.getEventStartDate());
+        endDate.setText("Event End at: " + eventList.getEventEndDate());
+        details.setText("Remarks: " + eventList.getEventDetail());
         roomCount.setInputType(eventList.getEventStreamCount());
 
         return rowView;

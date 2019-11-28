@@ -10,4 +10,9 @@
   <color name="colorBlack">#000000</color>
   <color name="gradientStart">#FBEEE6</color>
   <color name="gradientEnd">#FFCAD4</color>
+  <color name="cardEventName">#8692D4</color>
+  <color name="darkPink">#ffc0cb</color>
+  <color name="lightPink">#FFCAD4</color>
+  <color name="lightPurple">#CDB3D4</color>
+
 </resources>
