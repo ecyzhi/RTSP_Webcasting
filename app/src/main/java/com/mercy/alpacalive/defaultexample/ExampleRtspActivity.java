@@ -296,4 +296,17 @@ public class ExampleRtspActivity extends AppCompatActivity
     RequestQueue requestQueue = Volley.newRequestQueue(this);
     requestQueue.add(stringRequest);
   }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+
+    deleteRoom();
+    finish();
+  }
 }

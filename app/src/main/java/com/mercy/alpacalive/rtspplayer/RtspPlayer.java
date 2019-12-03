@@ -40,6 +40,7 @@ public class RtspPlayer extends AppCompatActivity implements VlcListener, View.O
     private Button btnPrevious;
     private Button btnNext;
     private ProgressBar progressBar;
+    private String currentRoomCode;
 
     private SharedPreferences sharedPref;
     private String sharedPrefFile = "com.mercy.alpacalive";
@@ -85,8 +86,16 @@ public class RtspPlayer extends AppCompatActivity implements VlcListener, View.O
 
 
         // Entering generated rtsp url automatically
+        // If roomCode != 10 then it is raspberry pi server
         roomUrl = getIntent().getExtras().getString("ROOM_URL_KEY","Error");
-        etEndpoint.setText(roomUrl);
+        currentRoomCode = getIntent().getExtras().getString("ROOM_CODE_KEY","Error");
+
+        if(currentRoomCode.length() == 10) {
+            etEndpoint.setText(roomUrl);
+        }
+        else{
+            etEndpoint.setText(currentRoomCode);
+        }
 
 
 
@@ -151,10 +160,11 @@ public class RtspPlayer extends AppCompatActivity implements VlcListener, View.O
         bStartStop.setText(getString(R.string.start_player));
     }
 
+    // Set Progress Bar
     @Override
     public void onBuffering(MediaPlayer.Event event) {
         progressBar=findViewById(R.id.pgBar);
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
