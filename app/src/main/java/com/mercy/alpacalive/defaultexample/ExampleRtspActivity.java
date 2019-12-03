@@ -227,7 +227,7 @@ public class ExampleRtspActivity extends AppCompatActivity
         break;
     }
   }
-  
+
 
   @Override
   public void surfaceCreated(SurfaceHolder surfaceHolder) {

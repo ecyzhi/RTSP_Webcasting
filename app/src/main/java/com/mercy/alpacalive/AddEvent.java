@@ -3,6 +3,8 @@ package com.mercy.alpacalive;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +35,8 @@ public class AddEvent extends AppCompatActivity {
     private SharedPreferences sharedPref;
     private String sharedPrefFile = "com.mercy.alpacalive";
     private String GET_URL = "";
+
+    private int startYear, startMonth, startDay;
 
 
     @Override
@@ -84,11 +88,33 @@ public class AddEvent extends AppCompatActivity {
                             strBuf.append(0);
                         }
                         strBuf.append(dayOfMonth);
+                        Calendar currentDate = Calendar.getInstance();
 
-                        startDate.setText(strBuf.toString());
+                        //check date
+                        // year >> mm >> dd
+                        if( year < currentDate.get(Calendar.YEAR)||
+                                (year == currentDate.get(Calendar.YEAR) && month < currentDate.get(Calendar.MONTH))||
+                                (year == currentDate.get(Calendar.YEAR) && month == currentDate.get(Calendar.MONTH) && dayOfMonth < currentDate.get((Calendar.DAY_OF_MONTH))) ){
+                            startDate.setText(strBuf.toString());
+                            startDate.requestFocus();
+                            startDate.setError("Please do not choose past date");
+
+                            btnAddEvent.setClickable(false);
+                            btnAddEvent.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+                        }
+                        else {
+                            startYear = year;
+                            startMonth = month;
+                            startDay = dayOfMonth;
+                            startDate.setError(null);
+                            startDate.setText(strBuf.toString());
+                            btnAddEvent.getBackground().setColorFilter(null);
+                            btnAddEvent.setClickable(true);
+                        }
                     }
                 };
 
+                //BUT the date picker will go back to current date if start date is different from current date
                 // Get current year, month and day.
                 Calendar now = Calendar.getInstance();
                 int year = now.get(Calendar.YEAR);
@@ -101,6 +127,7 @@ public class AddEvent extends AppCompatActivity {
                 datePickerDialog.setTitle("Please select date.");
                 // Popup the dialog.
                 datePickerDialog.show();
+
             }
         });
 
@@ -128,15 +155,46 @@ public class AddEvent extends AppCompatActivity {
                         }
                         strBuf.append(dayOfMonth);
 
-                        endDate.setText(strBuf.toString());
+                        //check end date
+                        Calendar currentDate = Calendar.getInstance();
+
+                        if( year < startYear||
+                                (year == startYear && month < startMonth)||
+                                (year == startYear && month == startMonth && dayOfMonth < startDay)){
+                            endDate.setText(strBuf.toString());
+                            endDate.requestFocus();
+                            endDate.setError("End date must not before start date");
+
+                            btnAddEvent.setClickable(false);
+                            btnAddEvent.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+                        }
+
+                        else if( year < currentDate.get(Calendar.YEAR)||
+                                (year == currentDate.get(Calendar.YEAR) && month < currentDate.get(Calendar.MONTH))||
+                                (year == currentDate.get(Calendar.YEAR) && month == currentDate.get(Calendar.MONTH) && dayOfMonth < currentDate.get((Calendar.DAY_OF_MONTH))) ){
+                            endDate.setText(strBuf.toString());
+                            endDate.requestFocus();
+                            endDate.setError("Please do not choose past date");
+
+                            btnAddEvent.setClickable(false);
+                            btnAddEvent.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+                        }
+                        else {
+
+                            endDate.setError(null);
+                            endDate.setText(strBuf.toString());
+                            btnAddEvent.getBackground().setColorFilter(null);
+                            btnAddEvent.setClickable(true);
+                        }
+
                     }
                 };
 
                 // Get current year, month and day.
                 Calendar now = Calendar.getInstance();
-                int year = now.get(Calendar.YEAR);
-                int month = now.get(Calendar.MONTH);
-                int day = now.get(Calendar.DAY_OF_MONTH);
+                int year = startYear;
+                int month = startMonth;
+                int day = startDay;
 
                 // Create the new DatePickerDialog instance.
                 //DatePickerDialog datePickerDialog = new DatePickerDialog(AddEvent.this, onDateSetListener, year, month, day);

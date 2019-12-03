@@ -14,5 +14,6 @@
   <color name="darkPink">#ffc0cb</color>
   <color name="lightPink">#FFCAD4</color>
   <color name="lightPurple">#CDB3D4</color>
+  <color name="grey">#808080</color>
 
 </resources>
