@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Alpaca Live</string>
     <string name="version">Version: %1$s</string>
-    <string name="default_ip">192.168.0.137</string>
+    <string name="default_ip">192.168.31.31</string>
     <string name="start_player">Start player</string>
     <string name="stop_player">Stop player</string>
     <string name="yourendpoint">yourendpoint</string>

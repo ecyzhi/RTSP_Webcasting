@@ -144,8 +144,14 @@ public class VlcVideoLibrary implements MediaPlayer.EventListener {
     //set correct class for render depend of constructor called
     if (surfaceView != null) {
       vlcOut.setVideoView(surfaceView);
-      width = surfaceView.getWidth();
-      height = surfaceView.getHeight();
+
+
+      // Ecy: To use predefined screen size, else the screen size during autoplay will be misaligned
+      if(width == 0 && height == 0) {
+        width = surfaceView.getWidth();
+        height = surfaceView.getHeight();
+      }
+
     } else if (textureView != null) {
       vlcOut.setVideoView(textureView);
       width = textureView.getWidth();
@@ -178,5 +184,24 @@ public class VlcVideoLibrary implements MediaPlayer.EventListener {
       default:
         break;
     }
+  }
+
+
+
+  // ECY: get height and width
+  public int getWidth() {
+    return width;
+  }
+
+  public void setWidth(int width) {
+    this.width = width;
+  }
+
+  public int getHeight() {
+    return height;
+  }
+
+  public void setHeight(int height) {
+    this.height = height;
   }
 }

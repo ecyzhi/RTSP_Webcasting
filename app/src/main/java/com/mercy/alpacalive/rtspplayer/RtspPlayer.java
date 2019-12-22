@@ -3,6 +3,7 @@ package com.mercy.alpacalive.rtspplayer;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
@@ -48,6 +49,9 @@ public class RtspPlayer extends AppCompatActivity implements VlcListener, View.O
     String strRoomCodeList = "";
     String roomUrl = "";
 
+    public int mHeight;
+    public int mWidth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,12 @@ public class RtspPlayer extends AppCompatActivity implements VlcListener, View.O
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_rtsp_player);
         SurfaceView surfaceView = findViewById(R.id.surfaceView);
+
+        // Getting mobile display size
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        mHeight = displayMetrics.heightPixels;
+        mWidth = displayMetrics.widthPixels;
 
         bStartStop = findViewById(R.id.b_start_stop);
 
@@ -68,8 +78,6 @@ public class RtspPlayer extends AppCompatActivity implements VlcListener, View.O
 
         sharedPref = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
         final String serverIP = sharedPref.getString("SERVER_IP","");
-
-
 
 
         // Split the room code string into list
@@ -99,11 +107,15 @@ public class RtspPlayer extends AppCompatActivity implements VlcListener, View.O
 
 
 
+
         // Onclick listener for previous and next button
         btnPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if((position - 1) >= 0){
+                    // Stop the video before changing source
+                    RtspPlayer.this.onClick(btnPrevious);
+
 //                    etEndpoint.setText("rtsp://" + serverIP + "/alpacalive/" + dbRoomCodeList.get(position-1));
 //                    position--;
 
@@ -127,6 +139,9 @@ public class RtspPlayer extends AppCompatActivity implements VlcListener, View.O
             @Override
             public void onClick(View v) {
                 if((position + 1) < dbRoomCodeList.size()){
+                    // Stop the video before changing source
+                    RtspPlayer.this.onClick(btnNext);
+
 //                    etEndpoint.setText("rtsp://" + serverIP + "/alpacalive/" + dbRoomCodeList.get(position+1));
 //                    position++;
 
@@ -146,6 +161,12 @@ public class RtspPlayer extends AppCompatActivity implements VlcListener, View.O
             }
         });
 
+
+        // Start the player automatically once this activity start
+        // Error: The video are misaligned if the width and height are not set, the VLCVideoLibrary.java is modified at the setMedia()
+        vlcVideoLibrary.setWidth(mWidth);
+        vlcVideoLibrary.setHeight(mHeight);
+        bStartStop.performClick();
     }
 
     @Override
@@ -184,5 +205,12 @@ public class RtspPlayer extends AppCompatActivity implements VlcListener, View.O
                 position = i;
             }
         }
+    }
+
+    // TODO: Stop the player when use press back button on phone
+    // Error: Call vlc stop function will cause the activity crashes
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 }
